@@ -1,4 +1,8 @@
-FROM maven:3.9.4-eclipse-temurin-11-focal
-WORKDIR /app
-COPY . /app
-COPY build/shop.war /usr/local/tomcat/webapps/shop.war
+FROM tomcat:9.0.80-jdk17
+
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+RUN rm -rf /usr/local/tomcat/webapps/examples
+ADD shop.war /usr/local/tomcat/webapps/
+
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
